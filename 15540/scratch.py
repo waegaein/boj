@@ -43,6 +43,7 @@ def get_most_suitable(m, a, b):
 
 def run():
 	res = list()
+
 	for line in sys.stdin:
 		line_split = line.split(' ')
 		m = int(line_split[0])
@@ -55,4 +56,4 @@ def run():
 	return '\n'.join(res)
 
 
-run()
+print(run())
