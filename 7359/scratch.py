@@ -74,23 +74,35 @@ def get_occupied_next(current_move, occupied):
 	return [occupied_head_next] + occupied[:len(occupied) - 1]
 
 
-occupied = get_occupied_initial()
+def walk_through(path):
+	occupied = get_occupied_initial()
+
+	moves = 0
+	while moves != len(path):
+		current_move = path[moves]
+		moves += 1
+
+		if will_fail_conflict(current_move, occupied):
+			print(msg_fail_conflict % moves)
+			return
+		elif will_fail_out(current_move, occupied):
+			print(msg_fail_out % moves)
+			return
+		else:
+			occupied = get_occupied_next(current_move, occupied)
+
+	print(msg_success % moves)
 
 
-path = paths[3]
-moves = 0
+def run():
+	#test = '18\nNWWWWWWWWWWSESSSWS\n20\nSSSWWNENNNNNWWWWSSSS\n30\nEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE\n13\nSWWWWWWWWWNEE\n0'
+	#for line in test.split('\n'):
+	for line in sys.stdin:
+		if line.isdigit():
+			if int(line) == 0:
+				return
+		else:
+			walk_through(line)
 
-while moves != len(path):
-	current_move = path[moves]
-	moves += 1
 
-	if will_fail_conflict(current_move, occupied):
-		print(msg_fail_conflict % moves)
-		exit(1)
-	elif will_fail_out(current_move, occupied):
-		print(msg_fail_out % moves)
-		exit(1)
-	else:
-		occupied = get_occupied_next(current_move, occupied)
-
-print(msg_success % moves)
+run()
