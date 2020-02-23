@@ -5,9 +5,6 @@ def parse_input():
     f = sys.stdin
     return [[int(num) for num in line.split()] for line in f.read().splitlines()[1:]]
 
-def get_range_with_jump(original, index):
-    list(original[:i])
-
 def is_smaller(person1, person2):
     return person1[0] < person2[0] and person1[1] < person2[1]
 
